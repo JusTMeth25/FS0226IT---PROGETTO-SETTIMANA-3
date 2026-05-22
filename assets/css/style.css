@@ -6,10 +6,122 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
   line-height: 1.5;
   color: #111;
   background: #fff;
+  background-color: #f7f5f2;
+}
+
+
+/* Regole per dark theme */
+body.dark {
+  background-color: #111;
+  color: #e0e0e0;
+}
+
+body.dark header {
+  background-color: #1a1a1a;
+}
+
+body.dark .form,
+body.dark .controlli,
+body.dark .statistiche,
+body.dark .lista {
+  background-color: #1e1e1e;
+  border-color: #333;
+}
+
+body.dark .form input,
+body.dark .form select,
+body.dark .controlli input,
+body.dark .controlli select {
+  background-color: #2a2a2a;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+body.dark .form input:focus,
+body.dark .form select:focus,
+body.dark .controlli input:focus,
+body.dark .controlli select:focus {
+  border-color: #dea816;
+}
+
+body.dark .stat-number {
+  color: #e0e0e0;
+}
+
+body.dark .stat-label {
+  color: #aaa;
+}
+
+body.dark .progress-bar {
+  background-color: #333;
+}
+
+body.dark .vinyl-card {
+  background-color: #2a2a2a;
+  border-color: #444;
+}
+
+body.dark .vinyl-title {
+  color: #e0e0e0;
+}
+
+body.dark .vinyl-autore,
+body.dark .vinyl-anno {
+  color: #aaa;
+}
+
+body.dark .btn-modifica,
+body.dark .btn-elimina,
+body.dark .btn-up,
+body.dark .btn-down {
+  background-color: #2a2a2a;
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+body.dark .btn-modifica:hover,
+body.dark .btn-up:hover,
+body.dark .btn-down:hover {
+  background-color: #3a3a3a;
+}
+
+body.dark .btn-elimina {
+  border-color: #e57373;
+  color: #e57373;
+}
+
+body.dark .btn-elimina:hover {
+  background-color: #3a2a2a;
+}
+
+body.dark .badge-taken {
+  background-color: #1b3a1b;
+  color: #81c784;
+}
+
+body.dark .badge-to-buy {
+  background-color: #3a3a1b;
+  color: #ffd54f;
+}
+
+body.dark .input-modifica-titolo {
+  background-color: #2a2a2a;
+  border-color: #dea816;
+  color: #e0e0e0;
+}
+
+body.dark .lista-vuota {
+  color: #aaa;
+}
+
+body.dark footer {
+  color: #666;
 }
 
 img {
@@ -32,6 +144,390 @@ button {
 /* Notifica nascosta di default */
 #notifica {
   display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #191918;
+  color: #f1f1f1;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-size: 0.95em;
+  font-weight: 500;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  max-width: 350px;
 }
 
 /* Scrivi qui sotto i tuoi stili */
+header {
+  color: #f1f1f1;
+  font-weight: 400;
+  background-color: #191918;
+  padding-bottom: 30px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-container {
+  margin-left: 90px;
+}
+
+.theme-btn {
+  display: inline-block;
+  font-weight: 400;
+  color: #f1f1f1;
+  border: 1px solid #f1f1f1;
+  border-radius: 7px;
+  border-color: #f1f1f1;
+  width: 120px;
+  height: 35px;
+  padding-bottom: 5px;
+  margin-top: 20px;
+  margin-right: 100px;
+}
+
+.theme-btn .dark {
+  background-color: #111;
+}
+
+.section-title {
+  display: block;
+  text-align: left;
+  font-size: 1.3em;
+  margin-bottom: 12px;
+}
+
+/* Sezione form aggiungi un vinile */
+.form {
+  min-width: 200px;
+  display: block;
+  background-color: #fefefe;
+  border: 1px solid #ddd8cf;
+  border-radius: 12px;
+  padding: 24px;
+  margin-left: 300px;
+  margin-right: 300px;
+  margin-bottom: 30px;
+}
+
+.form input {
+  display: inline;
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid #ccc7bd;
+  border-radius: 6px;
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+
+#campoAddTitle,
+#campoAddAuthor {
+  width: 300px;
+}
+
+.form select {
+  display: inline;
+  width: 200px;
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid #ccc7bd;
+  border-radius: 6px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.form input:focus,
+.form select:focus {
+  outline: none;
+  border-color: gold;
+}
+
+.form select:hover {
+  cursor: pointer;
+}
+
+.form button {
+  display: block;
+  font-weight: 650;
+  height: 40px;
+  padding: 0 22px;
+  border: none;
+  border-radius: 6px;
+  background-color: #dea816;
+  margin-top: 4px;
+}
+
+/* Sezione filtri ricerca */
+
+.controlli {
+  min-width: 200px;
+  display: block;
+  background-color: #fefefe;
+  border: 1px solid #ddd8cf;
+  border-radius: 12px;
+  padding: 24px;
+  margin-left: 300px;
+  margin-right: 300px;
+  margin-bottom: 30px;
+}
+
+.controlli select {
+  display: inline;
+  width: 310px;
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid #ccc7bd;
+  border-radius: 6px;
+  font-weight: 600;
+}
+.controlli input {
+  display: inline;
+  width: 400px;
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid #ccc7bd;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.controlli input:focus,
+.controlli select:focus {
+  outline: none;
+  border-color: gold;
+}
+
+
+.controlli select:hover {
+  cursor: pointer;
+}
+
+/* Sezione statistiche contatori e barra di progresso */
+.statistiche {
+  min-width: 200px;
+  background-color: #fefefe;
+  border: 1px solid #ddd8cf;
+  border-radius: 12px;
+  padding: 24px 24px 20px;
+  margin-left: 300px;
+  margin-right: 300px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 55px;
+}
+
+.stats-counters {
+  display: flex;
+  gap: 55px;
+}
+
+.stat-item {
+  display: inline-block;
+  text-align: left;
+  vertical-align: top;
+  margin-right: 60px;
+}
+
+.stat-item:last-child {
+  margin-right: 0;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2em;
+  font-weight: 700;
+  color: #191918;
+  margin-bottom: 2px;
+  line-height: 1.1;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.75em;
+  font-weight: 600;
+  color: #77736b;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+#totali-count {
+  color:  #dea816;
+}
+
+#posseduti-count {
+  color:  #dea816;
+}
+
+#to-buy-count {
+  color: #dea816;
+}
+
+/* Wrapper barra e percentuale */
+.progress-wrapper {
+  width: 100%;
+  
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background-color: #e8e5de;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color:  #dea816;
+  border-radius: 10px;
+}
+
+.progress-percent {
+  display: block;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: #77736b;
+  text-align: left;
+}
+
+/* Lista dinamica vinili */
+.lista {
+  min-width: 200px;
+  display: block;
+  background-color: #fefefe;
+  border: 1px solid #ddd8cf;
+  border-radius: 12px;
+  padding: 20px;
+  margin-left: 300px;
+  margin-right: 300px;
+  margin-bottom: 30px;
+}
+
+/* Card singolo vinile */
+.vinyl-card {
+  background: #fefefe;
+  border: 1px solid #ddd8cf;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.vinyl-card:last-child {
+  margin-bottom: 0;
+}
+
+.vinyl-taken {
+  border-left: 4px solid #2e7d32;
+}
+
+.vinyl-to-buy {
+  border-left: 4px solid #dea816;
+}
+
+.vinyl-title {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #191918;
+  margin-right: 10px;
+}
+
+.vinyl-autore {
+  font-size: 0.9em;
+  color: #77736b;
+  margin-right: 10px;
+}
+
+.vinyl-anno {
+  font-size: 0.85em;
+  color: #77736b;
+  margin-right: 10px;
+}
+
+/* Badge stato */
+.badge {
+  display: inline-block;
+  font-size: 0.75em;
+  font-weight: 600;
+  padding: 3px 12px;
+  border-radius: 12px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.badge-taken {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badge-to-buy {
+  background-color: #fff8e1;
+  color: #dea816;
+}
+
+/* Bottoni azioni in lista */
+.btn-modifica,
+.btn-elimina,
+.btn-up,
+.btn-down {
+  font-size: 0.85em;
+  padding: 4px 12px;
+  border: 1px solid #ccc7bd;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  margin-right: 6px;
+  vertical-align: middle;
+  transition: background-color 0.2s;
+}
+
+.btn-modifica:hover {
+  background-color: #f0f0f0;
+}
+
+.btn-elimina {
+  border-color: #e57373;
+  color: #e57373;
+}
+
+.btn-elimina:hover {
+  background-color: #fff5f5;
+}
+
+.btn-up,
+.btn-down {
+  padding: 4px 8px;
+}
+
+.btn-up:hover,
+.btn-down:hover {
+  background-color: #f0f0f0;
+}
+
+/* Input modifica titolo */
+.input-modifica-titolo {
+  font-size: 1.1em;
+  font-weight: 700;
+  padding: 2px 6px;
+  border: 1px solid #dea816;
+  border-radius: 4px;
+  width: 200px;
+  outline: none;
+}
+
+/* Messaggio quando lista vuota */
+.lista-vuota {
+  text-align: center;
+  color: #77736b;
+  font-size: 0.95em;
+  padding: 20px 0;
+}
+
+/* footer */
+footer {
+  text-align: center;
+  color: #8e8e8e;
+}

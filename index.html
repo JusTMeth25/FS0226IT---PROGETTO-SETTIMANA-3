@@ -1,43 +1,95 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Week Project — Settimana III</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
 
   <header>
     <!-- Titolo dell'app + sottotitolo + button tema chiaro/scuro -->
+    <div class="header-container">
+      <h1>La mia collezione di vinili</h1>
+      <p>Tieni traccia dei vinili che hai comprato o che vuoi acquistare.</p>
+    </div>
+    <button class="theme-btn" type="button">🌙Tema scuro</button>
   </header>
 
   <main>
 
     <section class="form">
       <!-- Form di inserimento di nuovi elementi -->
+      <h4 class="section-title">Aggiungi un vinile</h4>
+      <input type="text" id="campoAddTitle" placeholder="Titolo del vinile">
+      <input type="text" id="campoAddAuthor" placeholder="Autore / Artista">
+      <input type="number" id="campoAddYear" placeholder="Anno di uscita">
+      <select name="status" id="status">
+        <option value="to-buy">Da acquistare</option>
+        <option value="taken">Posseduto</option>
+      </select>
+      <button type="submit">Aggiungi</button>
     </section>
 
     <section class="controlli">
       <!-- Ricerca live, filtro (select), ordinamento -->
+      <input type="text" id="searchFilter" placeholder="Cerca per titolo o artista...">
+      <select name="filterStatus" id="filterStatus">
+        <option value="all">Tutti</option>
+        <option value="to-buy">Da acquistare</option>
+        <option value="taken">Acquistati</option>
+      </select>
+      <select name="sortFilter" id="sortFilter">
+        <option value="anno-crescente">Ordina per anno (crescente)</option>
+        <option value="anno-decrescente">Ordina per anno (decrescente)</option>
+        <option value="titolo-AZ">Ordina per titolo (A-Z)</option>
+        <option value="titolo-ZA">Ordina per titolo (Z-A)</option>
+      </select>
     </section>
 
     <section class="statistiche">
-      <!-- Conteggi e/o barre orizzontali -->
+      <!-- Conteggi e barra di progresso -->
+      <div class="stats-counters">
+        <div class="stat-item">
+          <span class="stat-number" id="totali-count">0</span>
+          <span class="stat-label">Totali</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="posseduti-count">0</span>
+          <span class="stat-label">Posseduti</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="to-buy-count">0</span>
+          <span class="stat-label">Da acquistare</span>
+        </div>
+      </div>
+      <div class="progress-wrapper">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+        </div>
+        <span class="progress-percent" id="progress-percent">0% posseduti</span>
+      </div>
     </section>
 
     <section class="lista">
       <!-- Container che render() ricostruisce a ogni cambio di stato -->
+      <ul id="list-vinyl">
+      </ul>
     </section>
 
     <div id="notifica"></div>
 
   </main>
-
+  <br><br>
   <footer>
     <!-- Autore, anno -->
+    <p>Vinilshelf - Colleziona i tuoi vinili - Epicode Full Stack AI 2026</p>
   </footer>
 
   <script src="assets/js/script.js"></script>
 </body>
+
 </html>
