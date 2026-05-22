@@ -288,17 +288,17 @@ document.querySelector(".lista").addEventListener("click", function (e) {
     return;
   }
   if (target.classList.contains("btn-up")) {
-    const idx = vinili.findIndex((v) => v.id === id);
+    const indice = vinili.findIndex((v) => v.id === id);
     if (idx > 0) {
-      [vinili[idx - 1], vinili[idx]] = [vinili[idx], vinili[idx - 1]];
+      [vinili[indice - 1], vinili[indice]] = [vinili[indice], vinili[indice - 1]];
       render();
     }
     return;
   }
   if (target.classList.contains("btn-down")) {
-    const idx = vinili.findIndex((v) => v.id === id);
+    const altroIndice = vinili.findIndex((v) => v.id === id);
     if (idx < vinili.length - 1) {
-      [vinili[idx + 1], vinili[idx]] = [vinili[idx], vinili[idx + 1]];
+      [vinili[altroIndice + 1], vinili[altroIndice]] = [vinili[altroIndice], vinili[altroIndice + 1]];
       render();
     }
     return;
