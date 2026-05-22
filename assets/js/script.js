@@ -63,8 +63,6 @@ const viniliDefault = [
   },
 ];
 
-vinili = [...viniliDefault];
-
 /* funzione notifica */
 
 function notifica(msg) {
@@ -330,7 +328,10 @@ document.querySelector(".lista").addEventListener("click", function (e) {
   if (target.classList.contains("btn-up")) {
     const indice = vinili.findIndex((v) => v.id === id);
     if (indice > 0) {
-      [vinili[indice - 1], vinili[indice]] = [vinili[indice], vinili[indice - 1]];
+      [vinili[indice - 1], vinili[indice]] = [
+        vinili[indice],
+        vinili[indice - 1],
+      ];
       ordinamento = "";
       render();
     }
@@ -339,7 +340,10 @@ document.querySelector(".lista").addEventListener("click", function (e) {
   if (target.classList.contains("btn-down")) {
     const indice = vinili.findIndex((v) => v.id === id);
     if (indice < vinili.length - 1) {
-      [vinili[indice + 1], vinili[indice]] = [vinili[indice], vinili[indice + 1]];
+      [vinili[indice + 1], vinili[indice]] = [
+        vinili[indice],
+        vinili[indice + 1],
+      ];
       ordinamento = "";
       render();
     }
@@ -390,7 +394,26 @@ document.querySelector(".theme-btn").addEventListener("click", function () {
   btn.textContent = document.body.classList.contains("dark")
     ? "☀️ Tema chiaro"
     : "🌙 Tema scuro";
+
+  localStorage.setItem("temaScuro", document.body.classList.contains("dark"));
 });
+
+const savedTheme = localStorage.getItem("temaScuro");
+if (savedTheme === "true") {
+  document.body.classList.add("dark");
+  document.querySelector(".theme-btn").textContent = "☀️ Tema chiaro";
+} else {
+  document.body.classList.remove("dark");
+  document.querySelector(".theme-btn").textContent = "🌙 Tema scuro";
+}
+
+const savedVinyl = localStorage.getItem("vinili");
+if (savedVinyl) {
+  const parsato = JSON.parse(savedVinyl);
+  vinili = parsato.length > 0 ? parsato : [...viniliDefault];
+} else {
+  vinili = [...viniliDefault];
+}
 
 render();
 /* PERSISTENZA — localStorage (cerca tu su MDN)
