@@ -11,7 +11,6 @@ REGOLE
 - Niente AI per generare codice. Niente template scaricati.
 */
 
-
 /* STATO
    In cima al file definisci poche variabili globali:
    - un array di oggetti come dato principale (es. libri, ricette, film, ...)
@@ -131,8 +130,17 @@ function render() {
     annoSpan.classList.add("vinyl-anno");
     annoSpan.textContent = `(${v.anno})`;
     const badge = document.createElement("span");
-    badge.className = v.status === "taken" ? "badge badge-taken" : "badge badge-to-buy";
+    badge.className =
+      v.status === "taken" ? "badge badge-taken" : "badge badge-to-buy";
     badge.textContent = v.status === "taken" ? "Posseduto" : "Da acquistare";
+    const btnPosseduto = document.createElement("button");
+    btnPosseduto.classList.add("btn-posseduto");
+    btnPosseduto.textContent = "✅ Segna posseduto";
+    btnPosseduto.dataset.id = v.id;
+    const btnDaAcquistare = document.createElement("button");
+    btnDaAcquistare.classList.add("btn-da-acquistare");
+    btnDaAcquistare.textContent = "🛒 Da acquistare";
+    btnDaAcquistare.dataset.id = v.id;
     const btnModifica = document.createElement("button");
     btnModifica.classList.add("btn-modifica");
     btnModifica.textContent = "✏️ Modifica";
@@ -141,23 +149,25 @@ function render() {
     btnElimina.classList.add("btn-elimina");
     btnElimina.textContent = "🗑️ Elimina";
     btnElimina.dataset.id = v.id;
-    const btpUp = document.createElement("button");
-    btpUp.classList.add("btn-up");
-    btpUp.textContent = "⬆️";
-    btpUp.dataset.id = v.id;
-    const btpDown = document.createElement("button");
-    btpDown.classList.add("btn-down");
-    btpDown.textContent = "⬇️";
-    btpDown.dataset.id = v.id;
+    const btnUp = document.createElement("button");
+    btnUp.classList.add("btn-up");
+    btnUp.textContent = "⬆️";
+    btnUp.dataset.id = v.id;
+    const btnDown = document.createElement("button");
+    btnDown.classList.add("btn-down");
+    btnDown.textContent = "⬇️";
+    btnDown.dataset.id = v.id;
 
     card.appendChild(titoloSpan);
     card.appendChild(autoreSpan);
     card.appendChild(annoSpan);
     card.appendChild(badge);
+    card.appendChild(btnPosseduto);
+    card.appendChild(btnDaAcquistare);
     card.appendChild(btnModifica);
     card.appendChild(btnElimina);
-    card.appendChild(btpUp);
-    card.appendChild(btpDown);
+    card.appendChild(btnUp);
+    card.appendChild(btnDown);
 
     containerLista.appendChild(card);
   });
@@ -199,8 +209,18 @@ function aggiungiVinile() {
   const annoRaw = document.getElementById("campoAddYear").value.trim();
   const status = document.getElementById("status").value;
 
-  if (!titolo || !autore || !annoRaw) {
+  if (!titolo && !autore && !annoRaw) {
     notifica("Compila tutti i campi obbligatori!");
+    return;
+  }
+
+  if (!autore) {
+    notifica("Compila il campo autore!");
+    return;
+  }
+
+  if (!annoRaw) {
+    notifica("Compila il campo anno di uscita!");
     return;
   }
 
@@ -226,10 +246,12 @@ function aggiungiVinile() {
   notifica("Vinile aggiunto con successo!");
 }
 
-document.querySelector(".form button[type='submit']").addEventListener("click", function (e) {
-  e.preventDefault();
-  aggiungiVinile();
-});
+document
+  .querySelector(".form button[type='submit']")
+  .addEventListener("click", function (e) {
+    e.preventDefault();
+    aggiungiVinile();
+  });
 /* INTERAZIONI BASE — eliminare, modificare, contare
    - Elimina: filter per id, render(). Event delegation sul container.
    - Modifica in-place: button "Modifica". Al click il testo diventa <input>,
@@ -287,18 +309,38 @@ document.querySelector(".lista").addEventListener("click", function (e) {
     });
     return;
   }
+  if (target.classList.contains("btn-posseduto")) {
+    const vinile = vinili.find((v) => v.id === id);
+    if (vinile && vinile.status !== "taken") {
+      vinile.status = "taken";
+      render();
+      notifica("Vinile segnato come posseduto!");
+    }
+    return;
+  }
+  if (target.classList.contains("btn-da-acquistare")) {
+    const vinile = vinili.find((v) => v.id === id);
+    if (vinile && vinile.status !== "to-buy") {
+      vinile.status = "to-buy";
+      render();
+      notifica("Vinile segnato da acquistare!");
+    }
+    return;
+  }
   if (target.classList.contains("btn-up")) {
     const indice = vinili.findIndex((v) => v.id === id);
-    if (idx > 0) {
+    if (indice > 0) {
       [vinili[indice - 1], vinili[indice]] = [vinili[indice], vinili[indice - 1]];
+      ordinamento = "";
       render();
     }
     return;
   }
   if (target.classList.contains("btn-down")) {
-    const altroIndice = vinili.findIndex((v) => v.id === id);
-    if (idx < vinili.length - 1) {
-      [vinili[altroIndice + 1], vinili[altroIndice]] = [vinili[altroIndice], vinili[altroIndice + 1]];
+    const indice = vinili.findIndex((v) => v.id === id);
+    if (indice < vinili.length - 1) {
+      [vinili[indice + 1], vinili[indice]] = [vinili[indice], vinili[indice + 1]];
+      ordinamento = "";
       render();
     }
     return;
@@ -324,12 +366,10 @@ document
     render();
   });
 
-document
-  .getElementById("sortFilter")
-  .addEventListener("change", function (e) {
-    ordinamento = e.target.value;
-    render();
-  });
+document.getElementById("sortFilter").addEventListener("change", function (e) {
+  ordinamento = e.target.value;
+  render();
+});
 
 /* NOTIFICHE TEMPORANEE
    Funzione notifica(testo) che imposta il testo del <div id="notifica">,
